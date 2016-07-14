@@ -17,6 +17,7 @@
   roles:
     - { role: kubernetes/preinstall, tags: preinstall }
     - { role: etcd, tags: etcd }
+    - { role: container_engine, tags: container }
     - { role: kubernetes/node, tags: node }
     - { role: network_plugin, tags: network }
 

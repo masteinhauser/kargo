@@ -8,18 +8,21 @@ etcd_version: v3.0.6
 calico_version: v0.20.0
 calico_cni_version: v1.3.1
 weave_version: v1.6.1
+rkt_version: 1.10.1
 
 # Download URL's
 etcd_download_url: "https://github.com/coreos/etcd/releases/download/{{ etcd_version }}/etcd-{{ etcd_version }}-linux-amd64.tar.gz"
 calico_cni_download_url: "https://github.com/projectcalico/calico-cni/releases/download/{{calico_cni_version}}/calico"
 calico_cni_ipam_download_url: "https://github.com/projectcalico/calico-cni/releases/download/{{calico_cni_version}}/calico-ipam"
 weave_download_url: "https://github.com/weaveworks/weave/releases/download/{{weave_version}}/weave"
+rkt_download_url: "https://github.com/coreos/rkt/releases/download/{{ rkt_version }}/rkt-{{ rkt_version }}.tar.gz"
 
 # Checksums
 calico_cni_checksum: "ac05cb9254b5aaa5822cf10325983431bd25489147f2edf9dec7e43d99c43e77"
 calico_cni_ipam_checksum: "3df6951a30749c279229e7e318e74ac4e41263996125be65257db7cd25097273"
 weave_checksum: "9bf9d6e5a839e7bcbb28cc00c7acae9d09284faa3e7a3720ca9c2b9e93c68580"
 etcd_checksum: "385afd518f93e3005510b7aaa04d38ee4a39f06f5152cd33bb86d4f0c94c7485"
+rkt_checksum: "424d2dd6dbdef981181ac082a2468e4dd1a8d51f165fc50c8ce52dd187fb728c"
 
 downloads:
   - name: calico-cni-plugin
@@ -48,6 +51,16 @@ downloads:
     sha256: "{{ weave_checksum }}"
     owner: "root"
     mode: "0755"
+
+  - name: rkt
+    version: "{{rkt_version}}"
+    dest: "rkt/rkt-{{ rkt_version }}.tar.gz"
+    sha256: "{{ rkt_checksum }}"
+    source_url: "{{ rkt_download_url }}"
+    url: "{{ rkt_download_url }}"
+    unarchive: true
+    owner: "root"
+    mode: "0750"
 
   - name: etcd
     version: "{{etcd_version}}"

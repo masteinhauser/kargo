@@ -15,8 +15,10 @@ calico_cni_version: v1.3.1
 weave_version: v1.6.1
 flannel_version: 0.5.5
 flannel_server_helper_version: 0.1
+rkt_version: v1.10.1
 
 # Download URL's
+rkt_download_url: "https://github.com/coreos/rkt/releases/download/v1.10.1/rkt-v1.10.1.tar.gz"
 etcd_download_url: "https://storage.googleapis.com/kargo/{{etcd_version}}_etcd"
 calico_cni_download_url: "https://storage.googleapis.com/kargo/{{calico_cni_version}}_calico-cni-plugin"
 calico_cni_ipam_download_url: "https://storage.googleapis.com/kargo/{{calico_cni_version}}_calico-cni-plugin-ipam"
@@ -43,6 +45,7 @@ calico_node_image_repo: "calico/node"
 calico_node_image_tag: "{{ calico_version }}"
 hyperkube_image_repo: "quay.io/coreos/hyperkube"
 hyperkube_image_tag: "{{ kube_version }}_coreos.0"
+rkt_checksum: "424d2dd6dbdef981181ac082a2468e4dd1a8d51f165fc50c8ce52dd187fb728c"
 
 downloads:
   calico_cni_plugin:
@@ -71,7 +74,15 @@ downloads:
     sha256: "{{ weave_checksum }}"
     owner: "root"
     mode: "0755"
-    enabled: "{{ kube_network_plugin == 'weave' }}"
+  rkt:
+    version: "{{rkt_version}}"
+    dest: "rkt/rkt-{{ rkt_version }}.tar.gz"
+    sha256: "{{ rkt_checksum }}"
+    source_url: "{{ rkt_download_url }}"
+    url: "{{ rkt_download_url }}"
+    unarchive: true
+    owner: "root"
+    mode: "0750"
   etcd:
     version: "{{etcd_version}}"
     dest: "etcd/etcd-{{ etcd_version }}-linux-amd64.tar.gz"
